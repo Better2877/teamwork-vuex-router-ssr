@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="banner">
+        <span class="banner-people"></span>
+        <h1>你好</h1>
+        <span class="banner-search"></span>
+    </div>
+    <div class="content"></div>
+    <div href="http://www.baidu.com" tag="a">http://www.baidu.com</div>
+</body>
+<style>
+h1{
+    font-size: 18px;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+.banner{
+    width: 100%;
+    height: 44px;
+    background: #4C6FB0;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+}
+.banner-people{
+    background: url('./images/photo.png') no-repeat;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+}
+.banner-search{
+    background: url('./images/big_img.png') no-repeat -48px -24px;
+    background-size: 240px 240px;
+    width: 24px;
+    height: 24px;
+}
+.content{
+    background: #ccc;
+    height: 1500px;
+}
+</style>
+<script>
+function bubbleSort(arr) {
+    console.time('冒泡时间')
+    var len = arr.length;
+    for(var i=0;i<len;i++){
+        for(var j=0;j<len-i-1;j++){
+            if(arr[j]>arr[j+1]){
+                var temp = arr[j+1];
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    console.timeEnd('冒泡时间')
+    return arr;
+}
+function bubbleSort2(arr) {
+    console.time('改进后冒泡耗时');
+    var i = arr.length -1;
+    while(i>0){
+        var pos = 0;
+        for(var j=0;j<i;j++){
+            if(arr[j]>arr[j+1]){
+                pos = j;
+                var temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+        i = pos;
+    }
+    console.timeEnd('改进后冒泡耗时');
+    return arr;
+}
+function bubbleSort3(arr) {
+    console.time('2改进后冒泡耗时');
+    var low = 0, high = arr.length-1;
+    var temp,j;
+    while(low<high){
+        for(j=low;j<high;j++){
+            if(arr[j]>arr[j+1]){
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+        high--;
+        for(j=high;j>low;j--){
+            if(arr[j]<arr[j-1]){
+                temp = arr[j];
+                arr[j] = arr[j-1];
+                arr[j-1] = temp;
+            }
+        }
+        low++;
+    }
+    console.timeEnd('2改进后冒泡耗时');
+    return arr;
+}
+function selectionSort(arr) {
+    var len = arr.length;
+    var minIndex,temp;
+    console.time('选择排序耗时');
+    for(var i=0;i<len-1;i++){
+        minIndex = i;
+        for(j=i+1;j<len;j++){
+            if(arr[j]<arr[minIndex]){
+                minIndex = j;
+            }
+        }
+        temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = arr[minIndex];
+    }
+    console.timeEnd('选择排序耗时');
+    return arr;
+}
+function insertionSort(arr) {
+    if(Object.prototype.toString.call(arr).slice(8,-1) === 'Array'){
+        var len = arr.length;
+        console.time('插入排序耗时');
+        for(var i=1;i<len;i++){
+            var key = arr[i];
+            var j = i-1;
+            while(j>=0 && arr[j]>key){
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = key;
+        }
+        console.timeEnd('插入排序耗时');
+        return arr;
+    }else{
+        return 'arr is not a array!';
+    }
+}
+function binaryInsertionSort(arr) {
+    if(Object.prototype.toString.call(arr).slice(8, -1) === 'Array'){
+        var len = arr.length;
+        console.time('二分插入排序耗时');
+        for(var i=1;i<len;i++){
+            var key = arr[i], left = 0, right = i-1;
+            while(left<=right){
+                var middle = parseInt((left+right)/2);
+                if(key<arr[middle]){
+                    right = middle-1;
+                }else{
+                    left = middle+1;
+                }
+            }
+            for(var j=i-1;j>=left;j--){
+                arr[j+1] = arr[j];
+            }
+            arr[left] = key;
+        }
+        console.timeEnd('二分插入排序耗时');
+        return arr;
+    }else{
+        return 'arr is not a array'
+    }
+}
+function shellSort(arr) {
+    var len = arr.length,
+        temp,
+        gap = 1;
+    console.time('希尔排序耗时');
+    while(gap<len/5){
+        gap = gap*5+1;
+    }
+    for(gap;gap>0;gap=Math.floor(gap/5)){
+        for(var i=gap;i<len;i++){
+            temp = arr[i];
+            for(var j=i-gap;j>=0&&arr[j]>temp;j-=gap){
+                arr[j+gap] = arr[j];
+            }
+            arr[j+gap] = temp;
+        }
+    }
+    console.timeEnd('希尔排序耗时');
+    return arr;
+}
+function mergeSort(arr) {
+    var len = arr.length;
+    if(len<2){
+        return arr;
+    }
+    var middle = Math.floor(len/2),
+        left = arr.slice(0,middle),
+        right = arr.slice(middle);
+    return merge(mergeSort(left), mergeSort(right));
+}
+function merge(left, right) {
+    var result = [];
+    // console.time('归并排序耗时');
+    while(left.length && right.length){
+        if(left[0] <= right[0]){
+            result.push(left.shift());
+        }else{
+            result.push(right.shift());
+        }
+    }
+    while(left.length){
+        result.push(left.shift());
+    }
+    while(right.length){
+        result.push(right.shift());
+    }
+    // console.timeEnd('归并排序耗时');
+    return result;
+}
+function quickSort(arr) {
+    console.time('快速排序耗时');
+    if(arr.length<=1){
+        return arr;
+    }
+    var pivotIndex = Math.floor(arr.length/2);
+    var pivot = arr.splice(pivotIndex,1)[0];
+    var left = [], right = [];
+    for(var i=0;i<arr.length;i++){
+        if(arr[i]<pivot){
+            left.push(arr[i]);
+        }else{
+            right.push(arr[i]);
+        }
+    }
+    console.timeEnd('快速排序耗时');
+    return quickSort(left).concat([pivot], quickSort(right));
+}
+var arr = new Array(1000);
+for(var i=0;i<1000;i++){
+    arr[i] = parseInt(Math.random()*1000);
+}
+console.log(bubbleSort(arr));
+console.log(bubbleSort2(arr));
+console.log(bubbleSort3(arr));
+console.log(selectionSort(arr));
+console.log(insertionSort(arr));
+console.log(binaryInsertionSort(arr));
+console.log(shellSort(arr));
+console.log(mergeSort(arr));
+console.log(quickSort(arr));
+</script>
+</html>

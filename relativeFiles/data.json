@@ -1,0 +1,485 @@
+{
+  "type": "object",
+  "title": "empty object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pId": {
+                "type": "string",
+                "description": "项目id",
+                "pattern": "^(150|160)[0-2]$"
+              },
+              "pName": {
+                "type": "string",
+                "description": "项目名称",
+                "default": "这是一个通信工程项目",
+                "pattern": "^[\\u4e00-\\u9fa5]{0,}$",
+                "enum": [
+                  "这是一个通信工程项目",
+                  "这是一个网络工程项目",
+                  "这是一个普通项目"
+                ]
+              },
+              "members": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "mId": {
+                      "type": "string",
+                      "description": "成员id",
+                      "pattern": "^(210|220)[0-2]$"
+                    },
+                    "mName": {
+                      "type": "string",
+                      "description": "成员姓名",
+                      "pattern": "^[\\u4e00-\\u9fa5]{2,4}$",
+                      "default": "钟稳霞",
+                      "enum": [
+                        "张三",
+                        "李四",
+                        "王二",
+                        "张三丰",
+                        "殷素素",
+                        "张无忌",
+                        "赵敏",
+                        "周芷若",
+                        "谢逊"
+                      ]
+                    },
+                    "tasks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tId": {
+                            "type": "string",
+                            "pattern": "^(10|20|30)[0-9]$",
+                            "description": "任务id"
+                          },
+                          "done": {
+                            "type": "boolean",
+                            "description": "任务是否完成"
+                          },
+                          "tName": {
+                            "type": "string",
+                            "description": "任务信息"
+                          },
+                          "notice": {
+                            "type": "string",
+                            "description": "备注"
+                          },
+                          "options": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "oCheck": {
+                                  "type": "boolean",
+                                  "description": "是否完成"
+                                },
+                                "oId": {
+                                  "type": "string",
+                                  "description": "检查项id",
+                                  "pattern": "^300[0-9]{5}$"
+                                },
+                                "oName": {
+                                  "type": "string",
+                                  "description": "检查项标题",
+                                  "pattern": "^[a-zA-Z]{1,}$"
+                                }
+                              },
+                              "description": "检查项信息",
+                              "required": [
+                                "oCheck",
+                                "oId",
+                                "oName"
+                              ]
+                            },
+                            "description": "检查项",
+                            "maxItems": 2,
+                            "uniqueItems": false,
+                            "minItems": 0
+                          }
+                        },
+                        "description": "任务详情",
+                        "required": [
+                          "tId",
+                          "done",
+                          "tName",
+                          "notice",
+                          "options"
+                        ]
+                      },
+                      "description": "任务列表",
+                      "minItems": 1,
+                      "maxItems": 2
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "成员职位",
+                      "pattern": "^(PM|RD|FE|UE|UI|QA|OP|DBA)#(M|T)[1-6]-[1-3]$"
+                    },
+                    "department": {
+                      "type": "string",
+                      "description": "成员部门",
+                      "enum": [
+                        "基础平台",
+                        "用户体验",
+                        "综合平台",
+                        "支付中心",
+                        "人力资源",
+                        "供应链",
+                        "一个名字超级长超级长的部门"
+                      ]
+                    },
+                    "maneger": {
+                      "type": "boolean",
+                      "description": "是否是主管"
+                    },
+                    "owner": {
+                      "type": "boolean",
+                      "description": "是否是负责人"
+                    },
+                    "mProcess": {
+                      "type": "number",
+                      "description": "个人总进度",
+                      "enum": [
+                        0,
+                        10,
+                        20,
+                        30,
+                        40,
+                        50,
+                        60,
+                        70,
+                        80,
+                        90,
+                        100
+                      ]
+                    },
+                    "mDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "个人预计完成时间"
+                    },
+                    "mDay": {
+                      "type": "string",
+                      "description": "人日",
+                      "pattern": "^(1[0-4])|[1-9]$"
+                    },
+                    "mTel": {
+                      "type": "string",
+                      "description": "手机号",
+                      "pattern": "^1(3|5|7|8)[0-9]{9}$"
+                    },
+                    "mMail": {
+                      "type": "string",
+                      "description": "邮箱",
+                      "pattern": "^[1-9][0-9]{8,10}@qq\\.com$"
+                    },
+                    "mLeader": {
+                      "type": "object",
+                      "properties": {
+                        "mLId": {
+                          "type": "string",
+                          "description": "领导员工id",
+                          "pattern": "^(210|220)[0-2]$"
+                        },
+                        "mLName": {
+                          "type": "string",
+                          "description": "领导姓名",
+                          "enum": [
+                            "张三",
+                            "李四",
+                            "王二",
+                            "张三丰",
+                            "殷素素",
+                            "张无忌",
+                            "赵敏",
+                            "周芷若",
+                            "谢逊"
+                          ]
+                        },
+                        "mLMail": {
+                          "type": "string",
+                          "description": "领导邮箱",
+                          "pattern": "^[1-9][0-9]{8,10}@qq\\.com$"
+                        }
+                      },
+                      "description": "领导",
+                      "required": [
+                        "mLId",
+                        "mLName",
+                        "mLMail"
+                      ]
+                    }
+                  },
+                  "description": "成员信息",
+                  "required": [
+                    "mId",
+                    "mName",
+                    "tasks",
+                    "title",
+                    "department",
+                    "maneger",
+                    "owner",
+                    "mProcess",
+                    "mDate",
+                    "mDay",
+                    "mTel",
+                    "mMail",
+                    "mLeader"
+                  ]
+                },
+                "description": "项目成员",
+                "uniqueItems": true,
+                "minItems": 3,
+                "maxItems": 10
+              },
+              "docs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "docURL": {
+                      "type": "string",
+                      "description": "文档链接",
+                      "pattern": "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=[a-zA-Z]{1,}$"
+                    },
+                    "docMsg": {
+                      "type": "object",
+                      "properties": {
+                        "operate": {
+                          "type": "string",
+                          "description": "操作",
+                          "default": "添加",
+                          "enum": [
+                            "添加",
+                            "删除",
+                            "修改"
+                          ]
+                        },
+                        "controller": {
+                          "type": "string",
+                          "description": "操作者",
+                          "pattern": "^[\\u4e00-\\u9fa5]{2,4}$",
+                          "default": "钟稳霞",
+                          "enum": [
+                            "张三",
+                            "李四",
+                            "王二",
+                            "张三丰",
+                            "殷素素",
+                            "张无忌",
+                            "赵敏",
+                            "周芷若",
+                            "谢逊"
+                          ]
+                        },
+                        "recent": {
+                          "type": "string",
+                          "description": "操作时间",
+                          "format": "date-time"
+                        }
+                      },
+                      "description": "文档操作",
+                      "required": [
+                        "operate",
+                        "controller",
+                        "recent"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "docURL",
+                    "docMsg"
+                  ],
+                  "description": "文档信息"
+                },
+                "description": "相关文档"
+              },
+              "timeLine": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "deadline": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "时间"
+                    },
+                    "lineName": {
+                      "type": "string",
+                      "description": "节点名称",
+                      "enum": [
+                        "需求会",
+                        "排期会",
+                        "联调",
+                        "测试",
+                        "上线"
+                      ]
+                    },
+                    "process": {
+                      "type": "number",
+                      "description": "进度",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "enum": [
+                        0,
+                        10,
+                        20,
+                        30,
+                        40,
+                        50,
+                        60,
+                        70,
+                        80,
+                        90,
+                        100
+                      ]
+                    }
+                  },
+                  "description": "时间节点信息",
+                  "required": [
+                    "deadline",
+                    "lineName",
+                    "process"
+                  ]
+                },
+                "description": "重要时间节点",
+                "uniqueItems": true,
+                "minItems": 5,
+                "maxItems": 5
+              },
+              "begin": {
+                "type": "number",
+                "description": "项目创建时间",
+                "maximum": 1577836800000,
+                "minimum": 1559347200000
+              },
+              "end": {
+                "type": "number",
+                "description": "项目最后更新时间",
+                "default": "1599373609320",
+                "enum": [
+                  1599373609320,
+                  1599373280000,
+                  1599373169320,
+                  1599373623320
+                ]
+              }
+            },
+            "description": "项目信息",
+            "required": [
+              "pId",
+              "pName",
+              "members",
+              "docs",
+              "timeLine",
+              "begin",
+              "end"
+            ]
+          },
+          "description": "项目数组",
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "dynamics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "danger": {
+                "type": "boolean",
+                "description": "是否紧急"
+              },
+              "recent": {
+                "type": "number",
+                "description": "操作时间",
+                "minimum": 1559347200000,
+                "maximum": 1599373609320
+              },
+              "controller": {
+                "type": "string",
+                "description": "操作者姓名",
+                "pattern": "^[\\u4e00-\\u9fa5]{2,4}$",
+                "default": "钟稳霞",
+                "enum": [
+                  "张三",
+                  "李四",
+                  "王二",
+                  "张三丰",
+                  "殷素素",
+                  "张无忌",
+                  "赵敏",
+                  "周芷若",
+                  "谢逊"
+                ]
+              },
+              "operate": {
+                "type": "string",
+                "description": "操作",
+                "enum": [
+                  "添加",
+                  "删除",
+                  "修改"
+                ]
+              },
+              "target": {
+                "type": "string",
+                "description": "操作对象",
+                "enum": [
+                  "需求文档",
+                  "视觉稿",
+                  "张无忌",
+                  "周芷若",
+                  "赵敏",
+                  "万分重要的项目交接文档"
+                ]
+              },
+              "cId": {
+                "type": "string",
+                "description": "操作者id",
+                "pattern": "^(210|220)[0-2]$"
+              },
+              "pId": {
+                "type": "string",
+                "description": "目标项目id",
+                "pattern": "^(150|160)[0-2]$"
+              }
+            },
+            "description": "动态信息",
+            "required": [
+              "danger",
+              "recent",
+              "controller",
+              "operate",
+              "target",
+              "cId",
+              "pId"
+            ]
+          },
+          "description": "动态信息列表",
+          "minItems": 250,
+          "maxItems": 300
+        }
+      },
+      "description": "data",
+      "required": [
+        "projects",
+        "dynamics"
+      ]
+    }
+  },
+  "description": "根数据",
+  "required": [
+    "data"
+  ]
+}
